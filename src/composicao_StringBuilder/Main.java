@@ -12,7 +12,7 @@ public class Main {
 		SimpleDateFormat dateFormate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		
 		String date = dateFormate.format(new Date());
-		System.out.println(date);
+		
 		String title = "Traveing to Nem Zealand";
 		String content = "I'm going to visit this wonderful country";
 		int likes = 12;

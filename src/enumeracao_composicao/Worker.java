@@ -44,8 +44,7 @@ public class Worker {
 		} else {
 			System.out.println("Id de contrato não encontrado!");
 		}
-		
-		
+			
 	}
 	
 	

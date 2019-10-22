@@ -66,7 +66,7 @@ public class Main {
 		int month = Integer.parseInt(monthYear[0]);  
 		int year  = Integer.parseInt(monthYear[1]);
 		
-	
+		
 		System.out.printf("Name: %s%n" , worker.getName());
 		System.out.printf("Departament: %s%n", worker.getDepartament().getName());
 		System.out.printf("Income for %d/%d: %.2f%n", month, year, worker.income(year, month));

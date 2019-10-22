@@ -53,9 +53,14 @@ public class Main {
 			worker.addContract(new HourContract( (i+1), d, value, duration));
 		}
 		
+		input.nextLine();
 		
-		System.out.println("Enter ID contract remove: ");
+		
+		System.out.print("Enter ID contract remove: ");
 		worker.removeContract(input.nextInt());
+		
+		
+		
 		
 		input.close();
 		

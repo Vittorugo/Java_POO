@@ -13,17 +13,22 @@ public class Board {
 	public Board(Integer rows, Integer columns) {
 		this.rows = rows;
 		this.columns = columns;
-		pieces = new Piece[this.rows][this.columns];
+		pieces = new Piece[rows][columns];
 	}
 
 	// Methods
 	
-	public Piece piece(int row, int column) {
+	public Piece piece(int row, int column) { // retorna a peça localizada nas coordenadas passadas.
 		return pieces[row][column];
 	}
 	
-	public Piece piece(Position position) {
+	public Piece piece(Position position) { // sobrecarga que retorna a peça pela posição 
 		return pieces[position.getRow()][position.getColumn()];
+	}
+	
+	public void placePiece( Piece piece, Position position) {
+		this.pieces[position.getRow()][position.getColumn()] = piece; // marcando a posição da peça no tabuleiro da peça
+		piece.position = position; // adicionando nova posição a peça
 	}
 	
 	// Getters and Setters

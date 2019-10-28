@@ -2,7 +2,9 @@ package application;
 
 import java.util.Scanner;
 
+import boardgame.Board;
 import boardgame.Position;
+import chess.ChessMatch;
 
 public class Program {
 
@@ -10,7 +12,9 @@ public class Program {
 		
 		Scanner input = new Scanner(System.in);
 		
-		Position position = new Position();
+		ChessMatch chessMatch = new ChessMatch();
+		
+		UI.printBoard(chessMatch.getPieces());
 		
 		input.close();
 		

@@ -16,6 +16,11 @@ public class Position {
 	
 	// Methods
 	
+	public void setValues(int row, int column){ //atualiza os valores de uma posição
+		this.row = row;
+		this.column = column;
+	}
+	
 	@Override
 	public String toString() {
 		return this.row + ", " + this.column;
@@ -26,11 +31,18 @@ public class Position {
 	public Integer getRow() {
 		return row;
 	}
+	
+
+	public void setRow(Integer row) {
+		this.row = row;
+	}
 
 	public Integer getColumn() {
 		return column;
 	}
 	
-	
+	public void setColumn(Integer column) {
+		this.column = column;
+	}
 	
 }

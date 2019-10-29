@@ -1,6 +1,5 @@
 package chess;
 
-import java.nio.channels.NonReadableChannelException;
 
 import boardgame.Board;
 import boardgame.Position;

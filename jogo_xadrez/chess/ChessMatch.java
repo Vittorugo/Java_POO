@@ -2,7 +2,6 @@ package chess;
 
 
 import boardgame.Board;
-import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
@@ -26,12 +25,16 @@ public class ChessMatch {
 		return mat;
 	}
 	
+	private void placeNewPiece(char column, int row, ChessPiece piece) {
+		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+	}
+	
 	// metodo que inicializa o jogo colocando as peças na posição inicial.
 	private void initialSetup() {
-		this.board.placePiece( new Rook(board, Color.WHITE), new Position(0,0));
-		this.board.placePiece( new Rook(board, Color.WHITE), new Position(0,7));
+		placeNewPiece('a', 8, new Rook(board, Color.WHITE));
+		placeNewPiece('h', 8, new Rook(board, Color.WHITE));
 		
-		this.board.placePiece(new King(board, Color.BLACK), new Position(7,3));
-		this.board.placePiece(new King(board, Color.BLACK), new Position(0,4));
+		placeNewPiece('e',8 ,new King(board, Color.WHITE));
+		placeNewPiece('d',1,new King(board, Color.BLACK));
 	}
 }

@@ -17,27 +17,18 @@ class ChessExceptionTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
 	@Test
-	public void canNotChooseOffBoardPositionLowerLimit() {
+	public void canNotChooseOffBoardPosition() {
 		
 		// Teste Limites inferiores 
-		int rowLower = 0; 
-		char columnLower = '`';
+		ChessException exceptionLower = assertThrows(ChessException.class, () -> new ChessPosition('`', 0));
+		assertEquals("Error instantiating ChessPosition. Valid values are from a1 to h8.", exceptionLower.getMessage());
 		
-		ChessException thrown = assertThrows(ChessException.class, () -> new ChessPosition(columnLower,rowLower));
-		assertEquals("Error instantiating ChessPosition. Valid values are from a1 to h8.", thrown.getMessage());
-	}
+
+		ChessException exceptionUpper = assertThrows(ChessException.class, () -> new ChessPosition('g', 9));
+		assertEquals("Error instantiating ChessPosition. Valid values are from a1 to h8.", exceptionUpper.getMessage());
 	
-	@Test
-	public void canNotChooseOffBoardPositionUpperLimit() {
-		
-		// Teste Limites superiores
-		int  rowUpper = 9;
-		char columnUpper = 'g';
-		
-		ChessException thrown = assertThrows(ChessException.class, () -> new ChessPosition(columnUpper, rowUpper));
-		assertEquals("Error instantiating ChessPosition. Valid values are from a1 to h8.", thrown.getMessage());
 	}
-	
+		
 	@Test
 	public void breakIntoPositionOfTheSameTeamPiece() {
 				

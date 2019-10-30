@@ -5,7 +5,7 @@ import boardgame.Position;
 public class ChessPosition {
 	
 	private char column;
-	private Integer row;
+	private Integer row; 
 	
 	
 	public ChessPosition(char column, Integer row) {
@@ -23,7 +23,7 @@ public class ChessPosition {
 	}
 	
 	protected static ChessPosition fromPosition(Position position) { // converte a posição da matriz para a do xadrez.
-		return new ChessPosition((char) ('a' - position.getColumn()), 8 - position.getRow());
+		return new ChessPosition((char) ('a' + position.getColumn()), 8 - position.getRow());
 		
 	}
 	

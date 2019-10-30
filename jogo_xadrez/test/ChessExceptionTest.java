@@ -37,8 +37,8 @@ class ChessExceptionTest {
 		int  sourceRow    = 8;
 		
 		// target
-		char targetColumn = 'e';
-		int  targetRow    = 8;
+		char targetColumn = 'd';
+		int  targetRow    = 7;
 		
 		ChessMatch moveChessMatch = new ChessMatch();
 				

@@ -52,7 +52,7 @@ public class Pawn extends ChessPiece {
 			}
 
 			piecePosition.setValues(this.position.getRow() + 2, this.position.getColumn());
-			Position position = new Position(this.position.getRow() -1, this.position.getColumn()); // posicao auxiliar para verificar se a posição em frente ao pião está livre podendo assim ele saltar duas posições para frente no primeiro lance.
+			Position position = new Position(this.position.getRow() + 1, this.position.getColumn()); // posicao auxiliar para verificar se a posição em frente ao pião está livre podendo assim ele saltar duas posições para frente no primeiro lance.
 			if (this.getBoard().positionExists(piecePosition) && !this.getBoard().thereIsAPiece(piecePosition) && this.getBoard().positionExists(position) && !this.getBoard().thereIsAPiece(position) && this.getMoveCount() == 0) {
 				mat[piecePosition.getRow()][piecePosition.getColumn()] = true;
 			}

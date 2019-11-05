@@ -1,101 +1,68 @@
 package manipulacao_pastas;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		// File file = new File("C:\\Users\\hugo\\Desktop\\pedidos.csv");
 		Locale.setDefault(Locale.US);
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 
-		OrderProduct products = new OrderProduct();
+		List<Product> list = new ArrayList<>();
 
-		String pathString = "C:\\Users\\hugo\\Desktop";
-		File path = new File(pathString);
+		System.out.println("Enter file path: ");
+		String sourceFileStr = sc.nextLine();
 
-		System.out.print("Enter client name: ");
-		String name = input.nextLine();
-		System.out.print("Enter client CPF: ");
-		int cpf = input.nextInt();
+		File sourceFile = new File(sourceFileStr);
+		String sourceFolderStr = sourceFile.getParent();
+		
+		boolean success = new File(sourceFolderStr + "\\out").mkdir();
+		
+		String targetFileStr = sourceFolderStr + "\\out\\summary.csv";
 
-		try {
+		try (BufferedReader br = new BufferedReader(new FileReader(sourceFileStr))) {
 
-			System.out.print("How many products do you want to register? ");
-			input.nextLine();
-			int num = input.nextInt();
+			String itemCsv = br.readLine();
+			while (itemCsv != null) {
 
-			for (int i = 0; i < num; i++) {
+				String[] fields = itemCsv.split(",");
+				String name = fields[0];
+				double price = Double.parseDouble(fields[1]);
+				int quantity = Integer.parseInt(fields[2]);
 
-				System.out.println();
-				System.out.printf("------- PRODUCT #%d -----------%n", i + 1);
+				list.add(new Product(0, name, price, quantity));
 
-				System.out.print("Enter product name: ");
-				input.nextLine();
-				String nameProduct = input.nextLine();
-
-				System.out.print("Enter product price: ");
-				double priceProduct = input.nextDouble();
-
-				System.out.print("Enter product quantity: ");
-				int quantProduct = input.nextInt();
-
-				products.addProduct(new Product(i + 1, nameProduct, priceProduct, quantProduct));
+				itemCsv = br.readLine();
 			}
 
-			System.out.println();
-			System.out.print("Enter file name to store orders: ");
-			input.nextLine();
-			String targetFile = pathString + "\\" + input.nextLine() + ".csv"; // criando um arquivo .csv na pasta de
-																				// destino.
+			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
 
-			/*Writer writer = Files.newBufferedWriter(Paths.get(targetFile));
-			StatefulBeanToCsv<Product> beanToCsv = new StatefulBeanToCsvBuilder(writer).build();
-
-			beanToCsv.write();
-
-			writer.flush();
-			writer.close();
-			 */
-			
-			try (BufferedWriter bWriter = new BufferedWriter(new FileWriter(targetFile, true))) {
-
-				bWriter.write("NomeProduto, Preço, Quantidade");
-
-				for (Product p : products.getItemList()) {
-					bWriter.write(
-							p.getNameProduct() + "," + String.format("%.2f", p.getPrice()) + "," + p.getQuantity());
-					bWriter.newLine();
+				for (Product item : list) {
+					bw.write(item.getNameProduct() + "," + String.format("%.2f", item.total()));
+					bw.newLine();
 				}
 
+				System.out.println(targetFileStr + " CREATED!");
+				
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Error writing file: " + e.getMessage());
 			}
 
-			System.out.println();
-
-			for (Product p : products.getItemList()) {
-				System.out.println(p.toString());
-				System.out.println();
-			}
-
-		} catch (Exception e) {
-			System.out.println("Error: " + e);
+		} catch (IOException e) {
+			System.out.println("Error reading file: " + e.getMessage());
 		}
 
-		input.close();
+		sc.close();
 	}
-
 }

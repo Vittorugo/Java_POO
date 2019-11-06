@@ -49,7 +49,7 @@ public class Main {
 			try (BufferedWriter bw = new BufferedWriter(new FileWriter(targetFileStr))) {
 
 				for (Product item : list) {
-					bw.write(item.getNameProduct() + "," + String.format("%.2f", item.total()));
+					bw.write(item.getNameProduct() + "," + String.format("%.2f", item));
 					bw.newLine();
 				}
 

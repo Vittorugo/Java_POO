@@ -49,7 +49,7 @@ public class DB {
 	// Carregando as propriedade para conexao com o banco
 	private static Properties loaProperties() {
 		
-		try(FileInputStream fs = new FileInputStream("db.properties")){
+		try(FileInputStream fs = new FileInputStream("C:\\Users\\hugo\\eclipse-workspace\\curso_java\\JDBC\\db.properties")){
 			Properties properties = new Properties();
 			properties.load(fs);
 		
